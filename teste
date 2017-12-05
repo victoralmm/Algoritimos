@@ -1,0 +1,177 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
+
+typedef struct _produto{
+	char nome[30], data_fab[12], data_val[12];
+	double val_venda;
+}Produto;
+
+typedef struct _compra{
+	Produto produtos[20];
+	double total;
+}Compra;
+
+typedef struct _cartao{
+	int numero;
+	Compra compras[20];
+	double total_compras;
+}Cartao;
+
+typedef struct _cliente{
+	char nome[30], cpf[16], telefone[17];
+	Cartao cartao;
+}Cliente;
+
+typedef struct _estoque{
+	Produto produto;
+	int qtd_estoque;
+	double val_aquisicao;
+}Estoque;
+
+
+
+int cadastrar_cliente(Cliente *cadastro_cliente, int indice_cliente){
+  	   Cliente novo;
+  	   puts("Digite o nome do cliente");
+  	   fgets(novo.nome,30,stdin);
+       puts("Digite o cpf do cliiente");
+  	   fgets(novo.cpf,17,stdin);
+  	   puts("Digite o nome do cliente");
+  	   fgets(novo.telefone,18,stdin);
+
+  	   strcpy(cadastro_cliente[indice_cliente].nome, novo.nome);
+  	   strcpy(cadastro_cliente[indice_cliente].cpf, novo.cpf);
+  	   strcpy(cadastro_cliente[indice_cliente].telefone, novo.telefone);
+  	   return indice_cliente;
+ }
+
+void cadastrar_produto(){
+    printf("Falta implementar....\n");
+    }
+void cadastrar_venda(){
+    printf("Falta implementar....\n");
+}
+void buscar_cliente(){
+    printf("Falta implementar....\n");
+}
+void buscar_produto(){
+    printf("Falta implementar....\n");
+}
+void adicionar_prod_estoque(){
+    printf("Falta implementar....\n");
+}
+void listar_prod_fornecedor(){
+    printf("Falta implementar....\n");
+}
+void listar_prod_baixa(){
+    printf("Falta implementar....\n");
+}
+void listar_clientes(){
+    printf("Falta implementar....\n");
+}
+
+
+int main(void){
+	int opcao;
+	int indice_cliente = -1;
+	Cliente cadastro_cliente[1000];
+
+	do{
+		printf("\tMenu de Opções:\n");
+		printf("1 - Cadastrar clientes, produtos ou venda:\n");
+		printf("2 - Buscar cliente:\n");
+		printf("3 - Buscar produto:\n");
+		printf("4 - Adicionar produto no estoque:\n");
+		printf("5 - Listar produtos:\n");
+		printf("6 - Listar clientes:\n");
+		printf("0 - Sair do sistema:\n");
+		printf("\n--> ");
+		scanf("%d", &opcao);
+		printf("\n");
+		switch(opcao){
+			case 1:
+				do{
+					printf("\tSubmenu de cadastro\n");
+					printf("1 - Cadastrar cliente:\n");
+					printf("2 - Cadastrar produto:\n");
+					printf("3 - Cadastrar venda:\n");
+					printf("0 - Voltar ao menu anterior\n");
+					printf("\n--> ");
+					scanf("%d", &opcao);
+					printf("\n");
+					switch(opcao){
+						case 1:
+							indice_cliente++;
+							indice_cliente = cadastrar_cliente(cadastro_cliente,indice_cliente);
+							opcao = 0;
+							
+							break;
+						case 2:
+							cadastrar_produto();
+							opcao = 0;
+							break;
+						case 3:
+							cadastrar_venda();
+							opcao = 0;
+							break;
+						case 0:
+							break;
+						default:
+							printf("Opcao inválida\n\n");
+							break;
+					}
+				}while(opcao != 0);
+				opcao = 1;
+				break;
+			case 2:
+				buscar_cliente();
+				break;
+			case 3:
+				buscar_produto();
+				break;
+			case 4:
+				adicionar_prod_estoque();
+				break;
+			case 5:
+				do{
+					printf("\tSubmenu de produtos\n");
+					printf("1 - Listar produtos por fornecedor:\n");
+					printf("2 - Listar produtos em baixa no estoque:\n");
+					printf("0 - Voltar ao menu anterior\n");
+					printf("\n--> ");
+					scanf("%d", &opcao);
+					printf("\n");
+					switch(opcao){
+						case 1:
+							listar_prod_fornecedor();
+							opcao = 0;
+							break;
+						case 2:
+							listar_prod_baixa();
+							opcao = 0;
+							break;
+						case 0:
+							break;
+						default:
+							printf("Opcao inválida\n\n");
+							break;
+					}
+
+				}while(opcao != 0);
+				opcao = 5;
+				break;
+			case 6:
+				listar_clientes();
+				break;
+			case 0:
+				break;
+			default:
+				printf("Opção inválida\n\n");
+		}
+	}while(opcao != 0);
+
+
+	return 0;
+}
